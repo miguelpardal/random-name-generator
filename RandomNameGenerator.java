@@ -68,13 +68,19 @@ public class RandomNameGenerator {
 
     //  Main test
     public static void main(String[] args) throws Exception {
-        if (args.length < 2) {
-            System.err.println("usage: " + RandomNameGenerator.class.getSimpleName() + " <names> <surnames>");
+        if (args.length < 3) {
+            System.err.println("usage: " + RandomNameGenerator.class.getSimpleName() + " <names> <surnames> <number>");
             return;
         }
+
+        final String namesPath = args[0];
+        final String surnamesPath = args[1];
+        final int number = Integer.parseInt(args[2]);
+        if (number <= 0)
+            throw new IllegalArgumentException("Number must be positive!");
         
-        RandomNameGenerator rng = new RandomNameGenerator(args[0], args[1], new Random());
-        for(int i=0; i < 10; i++) {
+        RandomNameGenerator rng = new RandomNameGenerator(namesPath, surnamesPath, new Random());
+        for(int i=0; i < number; i++) {
             System.out.println(rng.nextName());
         }
     }
